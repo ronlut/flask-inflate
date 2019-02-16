@@ -1,23 +1,31 @@
-from flask import request
-
 import gzip
+from flask import request
 
 GZIP_CONTENT_ENCODING = 'gzip'
 
 
-def inflate_gzip(func):
+class Inflate(object):
+    def __init__(self, app=None):
+        if app is not None:
+            self.init_app(app)
+
+    @staticmethod
+    def init_app(app):
+        app.before_request(_inflate_gzipped_content)
+
+
+def inflate(func):
+    """
+    A decorator to inflate content of a single view function
+    """
     def wrapper(*args, **kwargs):
-        _inflate_gzip()
+        _inflate_gzipped_content()
         return func(*args, **kwargs)
 
     return wrapper
 
 
-def inflate_all(app):
-    app.before_request(_inflate_gzip)
-
-
-def _inflate_gzip():
+def _inflate_gzipped_content():
     content_encoding = getattr(request, 'content_encoding', None)
 
     if content_encoding != GZIP_CONTENT_ENCODING:
