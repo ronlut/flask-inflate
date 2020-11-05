@@ -14,7 +14,7 @@ def parse_requirements(filename):
 
 setup(
     name='Flask-Inflate',
-    version='0.2',
+    version='0.3',
     url='https://github.com/ronlut/flask-inflate',
     license='MIT',
     author='Rony Lutsky',
