@@ -1,4 +1,6 @@
 include MANIFEST.in
 include requirements.txt
+include requirements.test.txt
+include tests *
 include README.md
 include LICENSE

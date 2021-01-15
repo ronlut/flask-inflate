@@ -12,6 +12,7 @@ def parse_requirements(filename):
     lineiter = (line.strip() for line in open(filename))
     return [line for line in lineiter if line and not line.startswith("#")]
 
+
 setup(
     name='Flask-Inflate',
     version='0.3',
@@ -26,6 +27,8 @@ setup(
     include_package_data=True,
     platforms='any',
     install_requires=parse_requirements('requirements.txt'),
+    test_suite="tests",
+    tests_require=parse_requirements('requirements.test.txt'),
     classifiers=[
           'Framework :: Flask',
           'Environment :: Web Environment',
