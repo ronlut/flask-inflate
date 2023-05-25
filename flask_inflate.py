@@ -1,3 +1,4 @@
+import functools
 import gzip
 from flask import request
 
@@ -18,6 +19,7 @@ def inflate(func):
     """
     A decorator to inflate content of a single view function
     """
+    @functools.wraps(func)
     def wrapper(*args, **kwargs):
         _inflate_gzipped_content()
         return func(*args, **kwargs)
